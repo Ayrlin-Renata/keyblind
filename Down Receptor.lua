@@ -11,13 +11,10 @@ local t =
 		Texture = "_rflash",
 		Frame0000 = 0,
 		Delay0000 = 1,
-		InitCommand = function(self)
-			NOTESKIN:GetMetricA("ReceptorOverlay", "InitCommand")
-			self:xy(0,0):baserotationz(45)
-		end,
-		PressCommand = NOTESKIN:GetMetricA("ReceptorOverlay", "PressCommand"),
-		LiftCommand = NOTESKIN:GetMetricA("ReceptorOverlay", "LiftCommand"),
-		NoneCommand = NOTESKIN:GetMetricA("ReceptorArrow", "NoneCommand"),
+		InitCommand = NOTESKIN:GetMetricA("ReceptorOverlayStatic", "InitCommand"),
+		PressCommand = NOTESKIN:GetMetricA("ReceptorOverlayStatic", "PressCommand"),
+		LiftCommand = NOTESKIN:GetMetricA("ReceptorOverlayStatic", "LiftCommand"),
+		NoneCommand = NOTESKIN:GetMetricA("ReceptorArrow", "NoneCommand")
 	},
 	Def.Sprite {
 		Texture = "_eclipse",
