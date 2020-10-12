@@ -5,8 +5,8 @@ ret.RedirTable = {
 	Down = "Down",
 	Left = "Left",
 	Right = "Right",
-	UpLeft = "Down",
-	UpRight = "Down"
+	UpLeft = "UpLeft",
+	UpRight = "UpRight"
 }
 
 local OldRedir = ret.Redir
@@ -15,8 +15,21 @@ ret.Redir = function(sButton, sElement)
 	sButton, sElement = OldRedir(sButton, sElement)
 
 	--Point the head files back to the tap note
-	if string.find(sElement, "Head") or sElement == "Tap Fake" then
+	if string.find(sElement, "Head") 
+	or sElement == "Tap Fake" then
 		sElement = "Tap Note"
+	end
+	
+	if string.find(sElement, "Tap Explosion") then
+		sElement = "Tap Explosion Bright"
+		sButton = "Down"
+	end
+	
+	if string.find(sElement, "Active") 
+	or string.find(sElement, "Inactive")
+	or string.find(sElement, "Tap Mine")
+	or string.find(sElement, "Receptor") then
+		sButton = "Down"
 	end
 
 	sButton = ret.RedirTable[sButton]

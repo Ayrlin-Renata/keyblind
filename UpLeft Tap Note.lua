@@ -5,7 +5,7 @@ local t =
 		Frame0000 = 0,
 		Delay0000 = 1,
 		InitCommand = function(self)
-			self:xy(0,0):baserotationz(0)
+			self:y(0):baserotationz(225)
 		end
 	},
 	Def.Sprite {
