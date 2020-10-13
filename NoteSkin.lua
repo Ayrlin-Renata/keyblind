@@ -1,14 +1,5 @@
 local ret = ... or {}
 
-ret.RedirTable = {
-	Up = "Up",
-	Down = "Down",
-	Left = "Left",
-	Right = "Right",
-	UpLeft = "UpLeft",
-	UpRight = "UpRight"
-}
-
 local OldRedir = ret.Redir
 
 ret.Redir = function(sButton, sElement)
@@ -31,8 +22,23 @@ ret.Redir = function(sButton, sElement)
 	or string.find(sElement, "Receptor") then
 		sButton = "Down"
 	end
-
-	sButton = ret.RedirTable[sButton]
+	
+	if string.find(sElement, "Roll") then 
+		if string.find(sElement, "Bottomcap") then
+			if string.find(sElement, "Active") then
+				sElement = "Hold Bottomcap Active"
+			else 
+				sElement = "Hold Bottomcap Inactive"
+			end
+		end
+		if string.find(sElement, "Topcap") then
+			if string.find(sElement, "Active") then
+				sElement = "Hold Topcap Active"
+			else 
+				sElement = "Hold Topcap Inactive"
+			end
+		end
+	end
 
 	return sButton, sElement
 end
@@ -43,7 +49,8 @@ function ret.Load()
 
 	-- The main "Explosion" part just loads other actors; don't rotate
 	-- it.  The "Hold Explosion" part should not be rotated.
-	if Var "Element" == "Explosion" or Var "Element" == "Roll Explosion" then
+	if Var "Element" == "Explosion" 
+	or Var "Element" == "Roll Explosion" then
 		t.BaseRotationZ = nil
 	end
 	return t
@@ -81,7 +88,8 @@ ret.Blank = {
 	["Hold Tail Active"] = true,
 	["Hold Tail Inactive"] = true,
 	["Roll Tail Active"] = true,
-	["Roll Tail Inactive"] = true
+	["Roll Tail Inactive"] = true,
+	["Tap Lift"] = true
 }
 
 return ret
