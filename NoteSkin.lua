@@ -1,26 +1,28 @@
-local ret = ... or {}
+local noteskin = ... or {}
 
-local OldRedir = ret.Redir
+local OldRedir = noteskin.Redir
 
-ret.Redir = function(sButton, sElement)
+noteskin.Redir = function(sButton, sElement)
 	sButton, sElement = OldRedir(sButton, sElement)
 
 	--Point the head files back to the tap note
-	if string.find(sElement, "Head") 
-	or sElement == "Tap Fake" then
+	if sElement == "Tap Fake"
+	or string.find(sElement, "Head") 
+	or string.find(sElement, "Tap Note") then
+		sButton = ""
 		sElement = "Tap Note"
 	end
-	
+
 	if string.find(sElement, "Tap Explosion") then
 		sElement = "Tap Explosion Bright"
-		sButton = "Down"
+		sButton = ""
 	end
 	
-	if string.find(sElement, "Active") 
+	if string.find(sElement, "Receptor")
+	or string.find(sElement, "Active")
 	or string.find(sElement, "Inactive")
-	or string.find(sElement, "Tap Mine")
-	or string.find(sElement, "Receptor") then
-		sButton = "Down"
+	or string.find(sElement, "Tap Mine") then
+		sButton = ""
 	end
 	
 	if string.find(sElement, "Roll") then 
@@ -43,8 +45,8 @@ ret.Redir = function(sButton, sElement)
 	return sButton, sElement
 end
 
-local OldFunc = ret.Load
-function ret.Load()
+local OldFunc = noteskin.Load
+function noteskin.Load()
 	local t = OldFunc()
 
 	-- The main "Explosion" part just loads other actors; don't rotate
@@ -56,7 +58,7 @@ function ret.Load()
 	return t
 end
 
-ret.PartsToRotate = {
+noteskin.PartsToRotate = {
 	["Receptor"] = false,
 	["Tap Note"] = true,
 	["Tap Lift"] = false,
@@ -69,7 +71,7 @@ ret.PartsToRotate = {
 	["Roll Head Active"] = true,
 	["Roll Head Inactive"] = true
 }
-ret.Rotate = {
+noteskin.Rotate = {
 	Up = 180,
 	Down = 0,
 	Left = 90,
@@ -78,7 +80,7 @@ ret.Rotate = {
 	UpRight = 225
 }
 
-ret.Blank = {
+noteskin.Blank = {
 	["Hold Explosion"] = true,
 	["Roll Explosion"] = true,
 	["Hold Topcap Active"] = true,
@@ -92,4 +94,4 @@ ret.Blank = {
 	["Tap Lift"] = true
 }
 
-return ret
+return noteskin
