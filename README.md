@@ -1,10 +1,11 @@
 # keyblind
 Modern arrow/bar hybrid dance theme for Etterna.
 
-# Supports Noteskin Preferences
+# noteskin preferences
 
 Variable note arrows, bars, and receptors.
-See `metrics.ini`
+See `metrics.ini`.
+Based on Jole's Noteskin Preferences.
 
 # image previews
 
